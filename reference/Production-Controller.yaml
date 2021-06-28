@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Production Controller
   version: '1.0'
-  summary: rest api app to manage production sensors
+  description: rest api app to manage production sensors
   contact:
     name: Andrzej
     email: andrzolide@gmail.com
@@ -95,9 +95,7 @@ paths:
                 type:
                   type: string
                 status:
-                  type:
-                    - string
-                    - boolean
+                  type: boolean
                 '':
                   type: string
         description: ''
@@ -127,13 +125,6 @@ components:
       title: Device
       type: object
       x-internal: false
-      examples:
-        - id: '1122'
-          type: TEMP READER
-          last-measurement: '21'
-          last_update: 28.06.2021
-          status: true
-          'on': true
       properties:
         id:
           type: string
@@ -151,3 +142,12 @@ components:
         - id
         - type
         - 'on'
+      x-examples:
+        example-1:
+          value:
+            - id: '1122'
+              type: TEMP READER
+              last-measurement: '21'
+              last_update: 28.06.2021
+              status: true
+              'on': true
