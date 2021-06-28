@@ -21,11 +21,17 @@ paths:
               schema:
                 description: ''
                 type: array
-                x-examples:
-                  example-1:
-                    asd: asd
                 items:
                   $ref: '#/components/schemas/Device'
+              examples:
+                example-1:
+                  value:
+                    - id: string
+                      type: string
+                      last-measurement: string
+                      last_update: string
+                      status: true
+                      'on': true
       operationId: get-test
       description: get devices
     parameters: []
@@ -96,8 +102,6 @@ paths:
                   type: string
                 status:
                   type: boolean
-                '':
-                  type: string
         description: ''
     post:
       summary: ''
@@ -150,4 +154,4 @@ components:
               last-measurement: '21'
               last_update: 28.06.2021
               status: true
-              'on': true
+              on: true
