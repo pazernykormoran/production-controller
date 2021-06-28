@@ -1,0 +1,157 @@
+openapi: 3.0.0
+info:
+  title: Production Controller
+  version: '1.0'
+  description: rest api app to manage production sensors
+  contact:
+    name: Andrzej
+    email: andrzolide@gmail.com
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /devices:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+              examples:
+                example-1:
+                  value:
+                    - id: string
+                      type: string
+                      last-measurement: string
+                      last_update: string
+                      status: true
+                      'on': true
+      operationId: get-test
+      description: get devices
+    parameters: []
+  '/devices/{deviceId}':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: device identity
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: Device get
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '404':
+          description: Device Not Found
+      operationId: get-devices-deviceId
+      description: get one device with id deviceId
+      parameters: []
+    delete:
+      summary: ''
+      operationId: delete-devices-deviceId
+      responses:
+        '200':
+          description: Device deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '404':
+          description: Device not found
+      description: delete one device with id deviceId
+    put:
+      summary: ''
+      operationId: put-devices-deviceId
+      responses:
+        '200':
+          description: Device updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          description: Missing required information
+        '404':
+          description: Device not found
+      description: update one device with id deviceId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  'on': string
+              properties:
+                'on':
+                  type: boolean
+                type:
+                  type: string
+                status:
+                  type: boolean
+        description: ''
+    post:
+      summary: ''
+      operationId: post-devices-deviceId
+      responses:
+        '200':
+          description: Device added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          description: Missing required information
+        '401':
+          description: Device already exists
+      description: post one device with id deviceId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+components:
+  schemas:
+    Device:
+      title: Device
+      type: object
+      x-internal: false
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        last-measurement:
+          type: string
+        last_update:
+          type: string
+        status:
+          type: boolean
+        'on':
+          type: boolean
+      required:
+        - id
+        - type
+        - 'on'
+      x-examples:
+        example-1:
+          value:
+            - id: '1122'
+              type: TEMP READER
+              last-measurement: '21'
+              last_update: 28.06.2021
+              status: true
+              on: true
